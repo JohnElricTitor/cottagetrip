@@ -26,7 +26,7 @@ const LISTINGS = [
       "Outdoor fire pit and riverside seating area",
       "Resort amenity privileges on site"
     ],
-    lat: 45.52, lng: -77.10
+    lat: 45.667250, lng: -76.729175
   },
   {
     id: 2,
@@ -50,7 +50,7 @@ const LISTINGS = [
       "Patio with BBQ grill and outdoor dining",
       "Close to Trent-Severn Waterway Lock 34"
     ],
-    lat: 44.53, lng: -78.73
+    lat: 44.527339, lng: -78.625968
   },
   {
     id: 3,
@@ -74,7 +74,7 @@ const LISTINGS = [
       "Waterfront picnic tables and fire pit",
       "Quiet family-friendly cottage resort setting"
     ],
-    lat: 44.52, lng: -78.65
+    lat: 44.524148, lng: -78.563173
   },
   {
     id: 4,
@@ -98,7 +98,7 @@ const LISTINGS = [
       "Fire pit with Muskoka chairs overlooking water",
       "Spacious 4-bedroom layout for full 10-person group"
     ],
-    lat: 44.53, lng: -78.66
+    lat: 44.521263, lng: -78.565456
   },
   {
     id: 5,
@@ -122,7 +122,7 @@ const LISTINGS = [
       "Outdoor deck with BBQ and water views",
       "Spacious 4-bedroom interior"
     ],
-    lat: 44.42, lng: -78.37
+    lat: 44.445741, lng: -78.262538
   },
   {
     id: 6,
@@ -146,7 +146,7 @@ const LISTINGS = [
       "Dual private entrances with 2 full bathrooms",
       "Outdoor fire pit, picnic tables, and BBQ"
     ],
-    lat: 44.18, lng: -78.21
+    lat: 44.195995, lng: -78.098384
   },
   {
     id: 7,
@@ -170,7 +170,7 @@ const LISTINGS = [
       "Kayaks provided with safety gear",
       "Expansive waterside deck, gas BBQ, and fire pit"
     ],
-    lat: 45.55, lng: -77.32
+    lat: 45.593043, lng: -77.345000
   },
   {
     id: 8,
@@ -194,7 +194,7 @@ const LISTINGS = [
       "Fire pit overlooking the lake",
       "Pet-friendly property"
     ],
-    lat: 45.10, lng: -77.85
+    lat: 45.068404, lng: -78.052076
   },
   {
     id: 9,
@@ -218,7 +218,7 @@ const LISTINGS = [
       "Shared expansive backyard lawn to water",
       "Lakeside fire pit and outdoor dining with BBQ"
     ],
-    lat: 44.18, lng: -78.27
+    lat: 44.097432, lng: -78.281813
   },
   {
     id: 10,
@@ -242,7 +242,7 @@ const LISTINGS = [
       "Waterside fire pit with endless firewood",
       "3 full bathrooms ideal for large groups"
     ],
-    lat: 46.22, lng: -78.70
+    lat: 46.320131, lng: -78.705167
   },
   {
     id: 11,
@@ -266,7 +266,7 @@ const LISTINGS = [
       "Lakeside fire pit with Muskoka chairs",
       "Covered deck with propane BBQ"
     ],
-    lat: 44.58, lng: -79.00
+    lat: 44.712372, lng: -78.928234
   },
   {
     id: 12,
@@ -290,7 +290,7 @@ const LISTINGS = [
       "Multi-tier deck with BBQ grill",
       "2.5 bathrooms for easy group preparation"
     ],
-    lat: 44.58, lng: -79.14
+    lat: 44.438826, lng: -79.155773
   },
   {
     id: 13,
@@ -314,7 +314,7 @@ const LISTINGS = [
       "Sandy shoreline pocket for easy water access",
       "Private fire pit right by the river"
     ],
-    lat: 45.24, lng: -77.78
+    lat: 45.522022, lng: -77.786082
   },
   {
     id: 14,
@@ -338,7 +338,7 @@ const LISTINGS = [
       "Private lawn area with fire pit and outdoor dining",
       "Modern kitchen and high-speed amenities"
     ],
-    lat: 44.60, lng: -79.30
+    lat: 44.697685, lng: -79.391749
   },
   {
     id: 15,
@@ -362,7 +362,7 @@ const LISTINGS = [
       "Spacious covered deck with barbecue grill",
       "Surrounded by Haliburton/Kawartha wilderness"
     ],
-    lat: 45.06, lng: -78.10
+    lat: 44.471353, lng: -78.163770
   },
   {
     id: 16,
@@ -386,7 +386,7 @@ const LISTINGS = [
       "Large fire pit with supplied firewood",
       "Propane gas BBQ on the private riverside deck"
     ],
-    lat: 45.06, lng: -77.86
+    lat: 45.087473, lng: -77.911055
   },
 
   {
@@ -411,7 +411,7 @@ const LISTINGS = [
       "Stone fire pit with ample firewood and seating",
       "Spacious covered deck with outdoor dining and BBQ"
     ],
-    lat: 45.20, lng: -77.94
+    lat: 45.315396, lng: -77.512971
   },
   {
     id: 19,
@@ -435,7 +435,7 @@ const LISTINGS = [
       "Outdoor fire pit with supplied firewood",
       "Large patio with barbecue and dining furniture"
     ],
-    lat: 44.19, lng: -78.24
+    lat: 44.157045, lng: -78.148763
   },
   {
     id: 20,
@@ -459,7 +459,7 @@ const LISTINGS = [
       "Fire pit on the canal lawn with seating",
       "Expansive multi-level patio deck"
     ],
-    lat: 44.59, lng: -79.17
+    lat: 44.541952, lng: -79.202139
   },
   {
     id: 21,
@@ -483,7 +483,7 @@ const LISTINGS = [
       "5 full Queen beds — ideal for 10 adults",
       "Waterside fire pit and outdoor charcoal BBQ"
     ],
-    lat: 44.02, lng: -77.47
+    lat: 44.068259, lng: -77.599354
   },
   {
     id: 22,
@@ -507,7 +507,7 @@ const LISTINGS = [
       "Fire pit area overlooking the calm bay",
       "Peaceful wooded setting with total privacy"
     ],
-    lat: 45.50, lng: -77.08
+    lat: 45.001221, lng: -78.700023
   },
   {
     id: 23,
@@ -531,7 +531,7 @@ const LISTINGS = [
       "Outdoor dining area and BBQ grill",
       "Closest drive to Toronto (~1h 15m)"
     ],
-    lat: 44.10, lng: -78.86
+    lat: 43.889832, lng: -78.661985
   },
   {
     id: 24,
@@ -555,7 +555,7 @@ const LISTINGS = [
       "Fire pit by the beach with Muskoka chairs",
       "Expansive wraparound deck with barbecue grill"
     ],
-    lat: 46.10, lng: -76.08
+    lat: 46.087538, lng: -76.281013
   }
 ];
 
