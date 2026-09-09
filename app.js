@@ -594,11 +594,9 @@ const map = L.map('map', {
   touchZoom: true
 });
 
-// Flat colorful map – blue lakes, green parks, clear roads, no terrain texture
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  maxZoom: 19,
-  detectRetina: true
+  attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  maxZoom: 18
 }).addTo(map);
 
 // Store markers keyed by listing id
