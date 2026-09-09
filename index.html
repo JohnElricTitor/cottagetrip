@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Waterfront Cottage Rentals — Sept 19–20, 2026</title>
+  <meta name="description" content="Browse 24 waterfront cottage rentals east of Toronto for September 19-20, 2026. Interactive map and detailed listings.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header id="site-header">
+    <div class="header-inner">
+      <h1>🏡 Cottage Finder</h1>
+      <p class="subtitle">24 Waterfront Rentals · Sept 19–20, 2026 · East of Toronto</p>
+    </div>
+  </header>
+
+  <main id="app">
+    <section id="map-section">
+      <div id="map"></div>
+    </section>
+
+    <section id="listings-section">
+      <div class="listings-toolbar">
+        <span id="listing-count" class="listing-count">24 listings</span>
+        <div class="sort-group">
+          <label for="sort-select">Sort by</label>
+          <select id="sort-select">
+            <option value="price-asc" selected>Price: Low → High</option>
+            <option value="price-desc">Price: High → Low</option>
+            <option value="rating-desc">Rating: High → Low</option>
+            <option value="drive-asc">Drive: Short → Long</option>
+          </select>
+        </div>
+      </div>
+      <div id="listings-grid"></div>
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
