@@ -1,6 +1,6 @@
 // ============================================================
 // Cottage Finder – app.js
-// Single-page app: Leaflet map + listing cards
+// Single-page app: Google Maps + listing cards
 // ============================================================
 
 const LISTINGS = [
@@ -388,30 +388,7 @@ const LISTINGS = [
     ],
     lat: 45.06, lng: -77.86
   },
-  {
-    id: 17,
-    name: "Carp Haven | Waterfront & Hot Tub | Sunset Views",
-    region: "Calabogie / Greater Madawaska, ON",
-    waterBody: "Black Donald Lake / Madawaska River",
-    drive: "~4h 00m",
-    driveMin: 240,
-    capacity: "8 guests · 3 bedrooms · 6 beds · 1.5 baths",
-    rating: "4.90 ★",
-    ratingNum: 4.9,
-    reviews: "15 reviews",
-    badges: "Superhost",
-    price: 850,
-    link: "https://www.airbnb.ca/rooms/1409395252877395027",
-    image: "https://a0.muscache.com/im/pictures/hosting/Hosting-1409395252877395027/original/placeholder.jpeg?im_w=720",
-    amenities: [
-      "Located in Greater Madawaska on Madawaska River system",
-      "Private outdoor hot tub overlooking the lake",
-      "Private dock for swimming, boating, and fishing",
-      "Lakeside fire pit and outdoor dining area",
-      "Minutes to Calabogie Peaks and village amenities"
-    ],
-    lat: 45.28, lng: -76.75
-  },
+
   {
     id: 18,
     name: "Waterfront Escape - Hot Tub, Volleyball, Fire Pit",
@@ -585,46 +562,97 @@ const LISTINGS = [
 // ============================================================
 // Map setup
 // ============================================================
-const map = L.map('map', {
-  center: [44.8, -78.2],
+const map = new google.maps.Map(document.getElementById('map'), {
+  center: { lat: 44.8, lng: -78.2 },
   zoom: 7,
   zoomControl: true,
-  scrollWheelZoom: true,
-  dragging: true,
-  touchZoom: true
+  gestureHandling: 'auto'
 });
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-  maxZoom: 18
-}).addTo(map);
+// Shared InfoWindow (replaces Leaflet popups)
+const infoWindow = new google.maps.InfoWindow();
+
+// Custom price-marker overlay (replaces Leaflet divIcon)
+class PriceMarkerOverlay extends google.maps.OverlayView {
+  constructor(position, price, id, targetMap) {
+    super();
+    this.position = new google.maps.LatLng(position.lat, position.lng);
+    this.price = price;
+    this.listingId = id;
+    this.div = null;
+    this.clickHandler = null;
+    this.setMap(targetMap);
+  }
+
+  onAdd() {
+    this.div = document.createElement('div');
+    this.div.className = 'price-marker';
+    this.div.dataset.id = this.listingId;
+    this.div.textContent = `$${this.price}`;
+    this.div.style.position = 'absolute';
+    this.div.style.cursor = 'pointer';
+    this.div.style.transform = 'translate(-50%, -50%)';
+
+    const panes = this.getPanes();
+    panes.overlayMouseTarget.appendChild(this.div);
+
+    this.div.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (this.clickHandler) this.clickHandler();
+    });
+  }
+
+  draw() {
+    const projection = this.getProjection();
+    if (!projection || !this.div) return;
+    const pos = projection.fromLatLngToDivPixel(this.position);
+    this.div.style.left = pos.x + 'px';
+    this.div.style.top = pos.y + 'px';
+  }
+
+  onRemove() {
+    if (this.div && this.div.parentNode) {
+      this.div.parentNode.removeChild(this.div);
+      this.div = null;
+    }
+  }
+
+  getElement() {
+    return this.div;
+  }
+
+  getPosition() {
+    return this.position;
+  }
+}
 
 // Store markers keyed by listing id
 const markers = {};
+const bounds = new google.maps.LatLngBounds();
 
 LISTINGS.forEach(listing => {
-  const icon = L.divIcon({
-    className: '',
-    html: `<div class="price-marker" data-id="${listing.id}">$${listing.price}</div>`,
-    iconSize: [60, 26],
-    iconAnchor: [30, 13]
-  });
+  const overlay = new PriceMarkerOverlay(
+    { lat: listing.lat, lng: listing.lng },
+    listing.price,
+    listing.id,
+    map
+  );
 
-  const marker = L.marker([listing.lat, listing.lng], { icon })
-    .addTo(map)
-    .bindPopup(`<strong>${listing.name}</strong><br>$${listing.price} CAD`);
-
-  marker.on('click', () => {
+  overlay.clickHandler = () => {
+    infoWindow.setContent(`<strong>${listing.name}</strong><br>$${listing.price} CAD`);
+    infoWindow.setPosition({ lat: listing.lat, lng: listing.lng });
+    infoWindow.setOptions({ pixelOffset: new google.maps.Size(0, -15) });
+    infoWindow.open(map);
     setActiveCard(listing.id);
     scrollToCard(listing.id);
-  });
+  };
 
-  markers[listing.id] = marker;
+  markers[listing.id] = overlay;
+  bounds.extend({ lat: listing.lat, lng: listing.lng });
 });
 
 // Fit map to all markers
-const group = L.featureGroup(Object.values(markers));
-map.fitBounds(group.getBounds().pad(0.1));
+map.fitBounds(bounds, { top: 10, right: 10, bottom: 10, left: 10 });
 
 // ============================================================
 // Render cards
@@ -716,10 +744,7 @@ function setActiveCard(id) {
     const oldMarker = markers[activeId];
     if (oldMarker) {
       const el = oldMarker.getElement();
-      if (el) {
-        const priceEl = el.querySelector('.price-marker');
-        if (priceEl) priceEl.classList.remove('active');
-      }
+      if (el) el.classList.remove('active');
     }
   }
 
@@ -731,18 +756,19 @@ function setActiveCard(id) {
   const marker = markers[id];
   if (marker) {
     const el = marker.getElement();
-    if (el) {
-      const priceEl = el.querySelector('.price-marker');
-      if (priceEl) priceEl.classList.add('active');
-    }
+    if (el) el.classList.add('active');
   }
 }
 
 function focusMap(id) {
   const listing = LISTINGS.find(l => l.id === id);
   if (!listing) return;
-  map.flyTo([listing.lat, listing.lng], 12, { duration: 0.8 });
-  markers[id].openPopup();
+  map.panTo({ lat: listing.lat, lng: listing.lng });
+  map.setZoom(12);
+  infoWindow.setContent(`<strong>${listing.name}</strong><br>$${listing.price} CAD`);
+  infoWindow.setPosition({ lat: listing.lat, lng: listing.lng });
+  infoWindow.setOptions({ pixelOffset: new google.maps.Size(0, -15) });
+  infoWindow.open(map);
 }
 
 function scrollToCard(id) {
