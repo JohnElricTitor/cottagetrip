@@ -565,8 +565,9 @@ const LISTINGS = [
 const map = new google.maps.Map(document.getElementById('map'), {
   center: { lat: 44.8, lng: -78.2 },
   zoom: 7,
+  disableDefaultUI: true,
   zoomControl: true,
-  gestureHandling: 'auto'
+  gestureHandling: 'greedy'
 });
 
 // Shared InfoWindow (replaces Leaflet popups)
