@@ -594,9 +594,11 @@ const map = L.map('map', {
   touchZoom: true
 });
 
-L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
-  attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ',
-  maxZoom: 18
+// Flat colorful map – blue lakes, green parks, clear roads, no terrain texture
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  maxZoom: 19,
+  detectRetina: true
 }).addTo(map);
 
 // Store markers keyed by listing id
